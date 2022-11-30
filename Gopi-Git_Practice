@@ -1,1 +1,50 @@
-Sample File 
+Vaw.robot 
+*** Settings ***
+Library    SeleniumLibrary
+Library    XML
+
+Variables    ${EXECDIR}/Data.py
+Variables    ${EXECDIR}/Url.py
+Variables    ${EXECDIR}/Xpath.py
+
+
+*** Keywords ***
+Flipkart product page is opened 
+
+    Open Browser     ${Fkurl}    ${Browser}   
+    Maximize Browser Window
+
+    Sleep    4s
+    Wait Until Element Is Visible    ${FkAdtcBtn}
+    Scroll Element Into View    ${Fksv}
+    Click Element    ${FkAdtcBtn}
+
+    Sleep    5s
+    Execute Javascript  history.back()
+
+    Sleep    4s
+    Wait Until Element Is Visible    ${Fkcartview}
+    Scroll Element Into View    ${Fkcartview}
+    ${getmessage}    Get Text    ${Fkaddedcart}
+    Should Be Equal As Strings    ${getmessage}    ₹1,74,990
+
+    Sleep    5s
+    Wait Until Element Is Visible    ${Fkaddmore}
+    Scroll Element Into View    ${Fksv}
+    Sleep    3s
+    Click Element    ${Fkaddmore}
+
+    Sleep    5s
+    Execute Javascript  history.back()
+
+    Sleep    4s
+    Wait Until Element Is Visible    ${Fkcartview}
+    Scroll Element Into View    ${Fkcartview}
+    ${getmessage2}    Get Text    ${Fkaddedcart3}
+    Should Be Equal As Strings    ${getmessage2}    3
+
+    Sleep    4s
+    
+    
+    # Sleep    5s
+    # Click Element     ${Fkcartview}
